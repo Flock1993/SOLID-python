@@ -3,6 +3,7 @@
 # То есть дочерний класс должен полностью повторять функционал методов базового класса
 # Функционал можно расширять, но не менять.
 # Если в функции можно использовать родительский класс, то подставив дочерний класс функций не должна сломаться
+from abc import ABC, abstractmethod
 
 # Пример 1
 class Computer:
@@ -29,7 +30,53 @@ class Laptop(Computer):
         self.name = name
 
 
-# TODO Пример 2 с плавающей, летающей птицей https://youtu.be/gy-9ml_2Pz8?si=Lk5Toco6UnMpZZjX
+# Пример 2
+class BadBird(ABC):
+    def __init__(self, name):
+        self.name = name
+
+    @abstractmethod
+    def fly(self):
+        pass
+
+    @abstractmethod
+    def swim(self):
+        pass
+
+
+class Eagle(BadBird):
+    def fly(self):
+        print("Полёт")
+
+    def swim(self):
+        """Можем ожидать что метод будет рабочим"""
+        pass
+
+
+# Рефакторинг ----------------------------------------------------------------------------------------------------------
+
+
+class Bird(ABC):
+    def __init__(self, name):
+        self.name = name
+
+    @abstractmethod
+    def fly(self):
+        pass
+
+
+class SwimmingBird(Bird, ABC):
+    @abstractmethod
+    def swim(self):
+        pass
+
+
+class Duck(SwimmingBird):
+    def fly(self):
+        print("Полёт")
+
+    def swim(self):
+        print("Заплыв")
 
 
 if __name__ == '__main__':
