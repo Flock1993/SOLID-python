@@ -23,7 +23,7 @@ class Computer:
 
 
 class SaveComputer:
-    """Нарушается принцип открытости-закрытости"""
+    """Нарушается принцип открытости-закрытости, его исправление можно посмотреть в b_open-closed.py"""
     def __init__(self, computer: Computer):
         self.computer: Computer = computer
 
